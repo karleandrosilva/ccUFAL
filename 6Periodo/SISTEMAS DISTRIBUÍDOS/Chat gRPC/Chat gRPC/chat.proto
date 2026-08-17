@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package chat;
+
+// Mensagem trocada entre os nós
+message ChatMessage {
+  string sender    = 1;  // nome/endereço do remetente
+  string content   = 2;  // texto da mensagem
+  string timestamp = 3;  // horário de envio
+}
+
+// Confirmação de recebimento
+message Ack {
+  bool received = 1;
+}
+
+// Serviço simétrico: todo nó expõe SendMessage e pode chamar o outro
+service ChatService {
+  // Envio de uma mensagem simples (unary)
+  rpc SendMessage(ChatMessage) returns (Ack);
+
+  // Stream bidirecional – permite envio e recepção simultâneos
+  rpc Chat(stream ChatMessage) returns (stream ChatMessage);
+}

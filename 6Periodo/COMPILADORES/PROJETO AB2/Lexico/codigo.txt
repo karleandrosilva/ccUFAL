@@ -1,0 +1,17 @@
+int main() {
+    int a;
+    int b;
+
+    a = 24;
+    b = 18;
+
+    while (a != b) {
+        if (a > b) {
+            a = a - b;
+        } else {
+            a = b - a;
+        }
+    }
+
+    return 0;
+}
